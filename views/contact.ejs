@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom styles for the page -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .contact-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .contact-box,
+        .contact-form {
+            width: 80%;
+            max-width: 500px;
+            padding: 40px;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .contact-link {
+            display: block;
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-link:hover {
+            color: #0056b3;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+        }
+        .footer-links a {
+            color: #fff;
+            margin-right: 20px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #007bff; /* Change to your preferred hover color */
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="styled-text">
+                <a class="navbar-brand" href="/"><span>S</span><span>m</span><span>A</span><span>r</span><span>T</span><span>W</span><span>a</span><span>T</span><span>c</span><span>H</span><span>L</span><span>B</span></a>
+              </div>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cart">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<div class="contact-container">
+    <!-- Contact Box -->
+    <div class="contact-box">
+        <h1>Contact Us</h1>
+        <!-- WhatsApp link -->
+        <a href="https://wa.me/96179124494" target="_blank" class="contact-link">
+            <i class="fab fa-whatsapp"></i> WhatsApp Chat
+        </a>
+        <!-- Email link -->
+        <a href="mailto:smartwatchlb@proton.me" class="contact-link">
+            <i class="fas fa-envelope"></i> Send an Email
+        </a>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="contact-form">
+        <h2>Send a Message</h2>
+        <form action="/send-message" method="POST">
+            <!-- Hidden input fields to store IP address and country -->
+            <input type="hidden" name="ipAddress" id="ipAddress">
+            <input type="hidden" name="country" id="country">
+    
+            <div class="mb-3">
+                <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="phoneNumber" placeholder="Phone Number" required>
+            </div>
+            <div class="mb-3">
+                <input type="email" class="form-control" name="email" placeholder="Email" required>
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control" name="message" rows="4" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    
+<footer class="mt-auto">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>SmartWatchLB ©</h5>
+            </div>
+            <div class="col-md-4">
+                <div class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="/cart">Cart</a>
+                    <a href="/contact">Contact Us</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- Add any additional content or links here if needed -->
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+    
+    fetch('https://ipinfo.io/json?token=86332b1a283755') // Replace YOUR_TOKEN_HERE with your actual token from ipinfo.io
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('ipAddress').value = data.ip;
+            document.getElementById('country').value = data.country;
+        })
+        .catch(error => {
+            console.error('Error fetching IP address and country:', error);
+        });
+    // Parse URL query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const success = urlParams.get('success');
+    const message = decodeURIComponent(urlParams.get('message'));
+
+    // Display alert message based on query parameters
+    if (success === 'true') {
+        alert(message);
+    } else if (success === 'false') {
+        alert('Error: ' + message);
+    }
+</script>
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Font Awesome JS for icons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
+</body>
+
+</html>
